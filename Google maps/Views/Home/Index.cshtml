@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="map" style="min-height: 75vh"></div>
+
+
+@section scripts{
+
+    <!-- GOOGLE API KEY HERE -->
+   <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AddKEY type="text/javascript"></script>
+
+
+    <!-- maps scripts section -->
+
+    <script type="text/javascript">
+
+        
+
+        $(document).ready(function() {
+
+            
+        });
+
+
+        var map;
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        function initialize() {
+            var mapOptions = {
+                zoom: 8,
+                center: {lat: -34.397, lng: 150.644}
+            };
+            map = new google.maps.Map(document.getElementById('map'),
+                mapOptions);
+
+
+            var geoCodes = [
+                { lat: -34.397, lng: 149.044 },
+                { lat: -34.397, lng: 149.144 },				
+                { lat: -34.397, lng: 149.244 },
+                { lat: -34.397, lng: 149.344 },
+                { lat: -34.397, lng: 149.444 },
+                { lat: -34.397, lng: 149.544 },
+                { lat: -34.397, lng: 149.644 },
+                { lat: -34.397, lng: 149.744 },
+                { lat: -34.397, lng: 149.844 },
+                { lat: -34.397, lng: 149.944 },
+				
+                { lat: -34.097, lng: 148.044 },
+                { lat: -34.197, lng: 148.144 },
+                { lat: -34.297, lng: 148.244 },
+                { lat: -34.397, lng: 148.344 },
+                { lat: -34.497, lng: 148.444 },
+                { lat: -34.597, lng: 148.544 },
+                { lat: -34.697, lng: 148.644 },
+                { lat: -34.797, lng: 148.744 },
+                { lat: -34.897, lng: 148.844 },
+                { lat: -34.997, lng: 148.944 },
+				
+                { lat: -34.397, lng: 148.044 },
+                { lat: -34.397, lng: 148.144 },
+                { lat: -34.397, lng: 148.244 },
+                { lat: -34.397, lng: 148.344 },
+                { lat: -34.397, lng: 148.444 },
+                { lat: -34.397, lng: 148.544 },
+                { lat: -34.397, lng: 148.644 },
+                { lat: -34.397, lng: 148.744 },
+                { lat: -34.397, lng: 148.844 },
+                { lat: -34.397, lng: 148.944 },
+
+
+                { lat: -34.397, lng: 147.044 },
+                { lat: -34.397, lng: 147.144 },
+                { lat: -34.397, lng: 147.244 },
+                { lat: -34.397, lng: 147.344 },
+                { lat: -34.397, lng: 147.444 },
+                { lat: -34.397, lng: 147.544 },
+                { lat: -34.397, lng: 147.644 },
+                { lat: -34.397, lng: 147.744 },
+                { lat: -34.397, lng: 147.844 },
+                { lat: -34.397, lng: 147.944 },
+            ];
+
+
+            for (var i = 0; i < geoCodes.length; i++) {
+                var marker = new google.maps.Marker({
+                    // The below line is equivalent to writing:
+                    // position: new google.maps.LatLng(-34.397, 150.644)
+                    position: geoCodes[i],
+                    label: i+1 + '', //labels[i % labels.length],
+                    map: map
+                });
+
+                // You can use a LatLng literal in place of a google.maps.LatLng object when
+                // creating the Marker object. Once the Marker object is instantiated, its
+                // position will be available as a google.maps.LatLng object. In this case,
+                // we retrieve the marker's position using the
+                // google.maps.LatLng.getPosition() method.
+                var infowindow = new google.maps.InfoWindow({
+                    content: '<p>Marker Location:' + marker.getPosition() + '</p>'
+                });
+
+                google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.open(map, marker);
+                });
+            }
+
+            
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+
+        
+    </script>
+}
